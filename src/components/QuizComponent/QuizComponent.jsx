@@ -1,7 +1,9 @@
+import QuizQuestion from "../QuizQuestion/QuizQuestion";
+
 export default function QuizComponent({quiz}) {
     return (
-        <ul>
-            {quiz.map(item => <li>{item.title}</li>)}
+        <ul id="quiz">
+            {quiz.map(item => <QuizQuestion question={item} key={item.title}/>)}
         </ul>
     )
 }
