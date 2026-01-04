@@ -2,6 +2,7 @@ import MainHeader from "./components/MainHeader/MainHeader"
 import QuizLanding from "./components/QuizLanding/QuizLanding"
 import { useState } from "react"
 import { quiz } from "./assets/questions"
+import QuizComponent from "./components/QuizComponent/QuizComponent"
 function App() {
     const [quizStatus, setQuizStatus] = useState([])
 
@@ -18,7 +19,7 @@ function App() {
         <>
             <MainHeader />
             <main>
-                <QuizLanding onStartQuiz={handleStartQuiz} />
+                {quizStatus.length ? <QuizComponent quiz={quizStatus}/> : <QuizLanding onStartQuiz={handleStartQuiz} />}
             </main>
         </>
     )
