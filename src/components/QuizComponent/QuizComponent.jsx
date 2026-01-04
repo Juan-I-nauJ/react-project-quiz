@@ -1,9 +1,11 @@
-import QuizQuestion from "../QuizQuestion/QuizQuestion";
-
-export default function QuizComponent({quiz}) {
+import QuizQuestion from "../QuizQuestion/QuizQuestion"
+import { useContext } from "react"
+import { QuizContext } from "./../../store/quiz-context.jsx"
+export default function QuizComponent() {
+    const { quizStatus } = useContext(QuizContext)
     return (
         <ul id="quiz">
-            {quiz.map(item => <QuizQuestion question={item} key={item.title}/>)}
+            {quizStatus.map(item => <QuizQuestion question={item} key={item.title} />)}
         </ul>
     )
 }

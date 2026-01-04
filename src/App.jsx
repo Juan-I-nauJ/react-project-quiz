@@ -1,27 +1,18 @@
 import MainHeader from "./components/MainHeader/MainHeader"
 import QuizLanding from "./components/QuizLanding/QuizLanding"
-import { useState } from "react"
-import { quiz } from "./assets/questions"
 import QuizComponent from "./components/QuizComponent/QuizComponent"
+import { useContext } from "react"
+import { QuizContextProvider, QuizContext } from "./store/quiz-context"
 function App() {
-    const [quizStatus, setQuizStatus] = useState([])
-
-    const handleStartQuiz = () => {
-        let quizQuestions = [...quiz]
-        for (let i = quizQuestions.length -1; i > 0; i--) {
-            const shuffledValue = Math.floor(Math.random()*(i + 1));
-            [quizQuestions[i], quizQuestions[shuffledValue]] = [quizQuestions[shuffledValue], quizQuestions[i]]
-        }
-        setQuizStatus(quizQuestions.slice(0, 10))
-    }
-
+    const { quizStatus } = useContext(QuizContext)
+    const quizLength = quizStatus.length
     return (
-        <>
+        <QuizContextProvider>
             <MainHeader />
             <main>
-                {quizStatus.length ? <QuizComponent quiz={quizStatus}/> : <QuizLanding onStartQuiz={handleStartQuiz} />}
+                {quizLength ? <QuizComponent quiz={quizStatus} /> : <QuizLanding />}
             </main>
-        </>
+        </QuizContextProvider>
     )
 }
 
