@@ -1,9 +1,11 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import { quiz } from "./../assets/questions"
 
 export const QuizContext = createContext({
     quizStatus: [],
-    handleStartQuiz: () => { }
+    currentQuestion: 0,
+    handleStartQuiz: () => { },
+    handleAnswer: () => {}
 })
 
 const quizReducer = (state, action) => {
@@ -16,24 +18,29 @@ const quizReducer = (state, action) => {
         return { ...state ,quiz: quizQuestions.slice(0, 10) }
     }
     if (action.type === 'ANSWER') {
-        const quizQuestions = [...state]
+        const quizQuestions = [...state.quiz]
         const currentQuestion = quizQuestions[action.payload.questionIdx]
-        currentQuestion.answers[answerIdx].selected = true
-        return [...state, currentQuestion]
+        console.log(currentQuestion)
+        currentQuestion.answers[action.payload.answerIdx].selected = true
+        console.log(currentQuestion)
+        return [...state.quiz, currentQuestion]
     }
     return state
 }
 
 export function QuizContextProvider({ children }) {
     const [quizStatus, quizStatusDispatch] = useReducer(quizReducer, { quiz: [] })
+    const [currentQuestion, setCurrentQuestion] = useState(0)
     const handleStartQuiz = () => {
         quizStatusDispatch({ type: 'START' })
     }
     const handleAnswer = (questionIdx, answerIdx) => {
         quizStatusDispatch({type: 'ANSWER', payload: {questionIdx, answerIdx}})
+        setCurrentQuestion(old => old++)
     }
     const ctxValue = {
         quizStatus: quizStatus.quiz,
+        currentQuestion,
         handleStartQuiz,
         handleAnswer
     }

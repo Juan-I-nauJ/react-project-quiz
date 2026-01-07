@@ -1,5 +1,9 @@
-export default function QuizAnswer({answer}) {
+import { useContext } from "react";
+import { QuizContext } from "../../store/quiz-context";
+
+export default function QuizAnswer({answer, answerIdx}) {
+    const {handleAnswer} = useContext(QuizContext)
     return <li className="answer">
-        <button>{answer.text}</button>
+        <button onClick={() => handleAnswer(0, answerIdx)}>{answer.text}</button>
     </li>
 }

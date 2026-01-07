@@ -4,8 +4,8 @@ import { QuizContext } from "./../../store/quiz-context.jsx"
 export default function QuizComponent() {
     const { quizStatus } = useContext(QuizContext)
     return (
-        <ul id="quiz">
-            {quizStatus.map(item => <QuizQuestion question={item} key={item.title} />)}
-        </ul>
+        <article id="quiz">
+            <QuizQuestion question={quizStatus[0]} />
+        </article>
     )
 }

@@ -10,7 +10,7 @@ export default function QuizQuestion({ question }) {
                 <progress value="2" max="3" />
             </div>
             <ol id="answers">
-                {question.answers.map(item => <QuizAnswer answer={item} key={item.text}/>)}
+                {question.answers.map((item, idx) => <QuizAnswer answer={item} key={item.text} answerIdx={idx}/>)}
             </ol>
         </article>
     )
