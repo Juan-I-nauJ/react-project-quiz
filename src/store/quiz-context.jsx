@@ -47,7 +47,9 @@ export function QuizContextProvider({ children }) {
         setCurrentAnswerIdx(idx)
     }
     const handleAnswer = (questionIdx, answerIdx) => {
+        if (answerIdx) {
         quizStatusDispatch({ type: 'ANSWER', payload: { questionIdx, answerIdx } })
+        }
         setCurrentQuestionIdx(old => old + 1)
         setCurrentAnswerIdx(null)
         if (currentQuestionIdx >= quizStatus.quiz.length - 1) handleFinishQuiz()
