@@ -2,13 +2,13 @@ import { useEffect, useContext } from "react";
 import QuizAnswer from "../QuizAnswer/QuizAnswer";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { QuizContext } from "../../store/quiz-context";
-const MAX_TIME = 3000
+const MAX_TIME = 5000
 export default function QuizQuestion({ question, isLastAttempt }) {
     const { handleAnswer, currentQuestionIdx } = useContext(QuizContext)
     useEffect(() => {
         if (!isLastAttempt) {
             const timer = setTimeout(() => {
-                handleAnswer(currentQuestionIdx)
+                handleAnswer(currentQuestionIdx, null)
             }, MAX_TIME)
             return () => clearTimeout(timer)
         }
