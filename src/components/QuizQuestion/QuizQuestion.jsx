@@ -10,7 +10,7 @@ export default function QuizQuestion({ question, isLastAttempt }) {
                 {!isLastAttempt && <progress value="2" max="3" />}
             </div>
             <ol id="answers">
-                {question.answers.map((item, idx) => <QuizAnswer answer={item} key={item.text} answerIdx={idx} isLastAttempt={isLastAttempt}/>)}
+                {question.answers.map((item, idx) => <QuizAnswer answer={item} key={`${item.text} + ${idx}`} answerIdx={idx} isLastAttempt={isLastAttempt} />)}
             </ol>
         </article>
     )
