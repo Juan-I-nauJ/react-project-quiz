@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { QuizContext } from "../../store/quiz-context";
+import LastAttempt from "../LastAttempt/LastAttempt";
 
 export default function QuizLanding() {
     const { handleStartQuiz } = useContext(QuizContext)
@@ -9,12 +10,7 @@ export default function QuizLanding() {
             <p>
                 <button onClick={handleStartQuiz}>Start!</button>
             </p>
-            <div>
-                <p>Your last attempt was:</p>
-                <ul>
-                    <li>Example</li>
-                </ul>
-            </div>
+            <LastAttempt />
         </div>
 
     )
