@@ -10,7 +10,7 @@ export default function LastAttempt() {
             quizMap = (<div>
                 <p>Your last attempt was:</p>
                 <div>
-                    {lastQuiz.map(item => <QuizQuestion question={item} />)}
+                    {lastQuiz.map(item => <QuizQuestion question={item} isLastAttempt={true} key={item.title}/>)}
                 </div>
             </div>)
         }
