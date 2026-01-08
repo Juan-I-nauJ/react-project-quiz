@@ -6,8 +6,10 @@ export const QuizContext = createContext({
     currentQuestionIdx: 0,
     currentAnswerIdx: null,
     lastQuiz: [],
-    handleStartQuiz: () => { },
-    handleAnswer: () => {}
+    handleStartQuiz: () => {},
+    handleAnswer: () => {},
+    handleFinishQuiz: () => {},
+    handleRecoverQuiz: () => {}
 })
 
 const quizReducer = (state, action) => {
@@ -54,6 +56,10 @@ export function QuizContextProvider({ children }) {
         setLastQuiz(() => [...quizStatus.quiz])
         quizStatusDispatch({type: 'FINISH'})
     }
+    const handleRecoverQuiz = () => {
+        const storedQuiz = JSON.parse(localStorage.getItem('last-quiz'))
+        if (storedQuiz.length > 0) setLastQuiz([...storedQuiz])
+    }
     const ctxValue = {
         quizStatus: quizStatus.quiz,
         currentQuestionIdx,
@@ -61,7 +67,8 @@ export function QuizContextProvider({ children }) {
         lastQuiz,
         handleStartQuiz,
         handleSetCurrentAnswer,
-        handleAnswer
+        handleAnswer,
+        handleRecoverQuiz
     }
     return <QuizContext.Provider value={ctxValue}>
         {children}
