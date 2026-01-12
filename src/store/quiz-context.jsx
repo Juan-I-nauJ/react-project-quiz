@@ -14,6 +14,7 @@ export const QuizContext = createContext({
 
 const quizReducer = (state, action) => {
     if (action.type === 'START') {
+        localStorage.removeItem('last-quiz')
         let quizQuestions = [...quiz]
         for (let i = quizQuestions.length - 1; i > 0; i--) {
             const shuffledValue = Math.floor(Math.random() * (i + 1));
@@ -25,13 +26,10 @@ const quizReducer = (state, action) => {
         const quizQuestions = [...state.quiz]
         const currentQuestion = quizQuestions[action.payload.questionIdx]
         currentQuestion.answers[action.payload.answerIdx].selected = true
-        console.log(currentQuestion)
-        console.log(state)
         return {...state, quiz: quizQuestions}
     }
     if (action.type === 'SKIP') {
-        console.log('skip')
-        return state
+        return {...state}
     }
     if (action.type === 'FINISH') {
         localStorage.setItem('last-quiz', JSON.stringify([...state.quiz]))
@@ -54,12 +52,10 @@ export function QuizContextProvider({ children }) {
     }
     const handleAnswer = (questionIdx, answerIdx) => {
         if (answerIdx || answerIdx === 0) {
-            console.log('in answeridx ', answerIdx)
         quizStatusDispatch({ type: 'ANSWER', payload: { questionIdx, answerIdx } })
         } else {
             quizStatusDispatch({type: 'SKIP'})
         }
-        console.log('out of answeridx')
         setCurrentAnswerIdx(null)
         setCurrentQuestionIdx(old => old + 1)
         if (currentQuestionIdx >= quizStatus.quiz.length - 1) handleFinishQuiz()

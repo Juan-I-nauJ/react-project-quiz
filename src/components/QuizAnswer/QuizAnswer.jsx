@@ -16,7 +16,7 @@ export default function QuizAnswer({answer, answerIdx, isLastAttempt, ...props})
     }, [answerClass])
     const onAnswer = () => {
         setAnswerClass(answer.isTrue ? 'correct' : 'wrong')
-        handleSetCurrentAnswer(answerIdx)
+        handleSetCurrentAnswer(() => answerIdx)
         setTimeout(() => handleAnswer(currentQuestionIdx, answerIdx), 300)
     }
     return <li className="answer">
