@@ -6,7 +6,7 @@ export default function QuizLanding() {
     const { handleStartQuiz } = useContext(QuizContext)
     return (
         <div id="last-try">
-            <h2>This is quiz landing</h2>
+            <h2>Start your quiz attempt</h2>
             <p>
                 <button onClick={handleStartQuiz}>Start!</button>
             </p>

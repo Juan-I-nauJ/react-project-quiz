@@ -62,6 +62,8 @@ export function QuizContextProvider({ children }) {
     }
     const handleFinishQuiz = () => {
         setLastQuiz(() => [...quizStatus.quiz])
+        setCurrentAnswerIdx(null)
+        setCurrentQuestionIdx(0)
         quizStatusDispatch({ type: 'FINISH' })
     }
     const handleRecoverQuiz = () => {

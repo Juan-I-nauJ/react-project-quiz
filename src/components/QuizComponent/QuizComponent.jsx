@@ -5,7 +5,7 @@ export default function QuizComponent() {
     const { quizStatus, currentQuestionIdx } = useContext(QuizContext)
     return (
         <article id="quiz">
-            <QuizQuestion question={quizStatus[currentQuestionIdx]} />
+            <QuizQuestion question={quizStatus[currentQuestionIdx]} key={quizStatus[currentQuestionIdx].title}/>
         </article>
     )
 }
