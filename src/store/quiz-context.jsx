@@ -20,7 +20,12 @@ const quizReducer = (state, action) => {
             const shuffledValue = Math.floor(Math.random() * (i + 1));
             [quizQuestions[i], quizQuestions[shuffledValue]] = [quizQuestions[shuffledValue], quizQuestions[i]]
         }
-        return { ...state, quiz: quizQuestions.slice(0, 10) }
+        const chosenQuestions = quizQuestions.slice(0, 10)
+        const chosenQuestionsAnswers = chosenQuestions.flatMap(item => item.answers)
+        chosenQuestionsAnswers.forEach(item => {
+            if (item.selected) delete item.selected
+        })
+        return { ...state, quiz: chosenQuestions }
     }
     if (action.type === 'ANSWER') {
         const quizQuestions = [...state.quiz]
